@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import styles from './styles'
+import { connect } from 'react-redux'
+import { setMovieInfo } from '../redux/movieReducer'
 
 class MovieForm extends Component {
   constructor() {
@@ -19,6 +21,8 @@ class MovieForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault()
+    const {title, poster, rating } = this.state
+    this.props.setMovieInfo(title, poster, rating)
     this.props.history.push('/confirm')
   }
 
@@ -56,4 +60,6 @@ class MovieForm extends Component {
     )
   }
 }
-export default MovieForm
+
+
+export default connect(null, { setMovieInfo })(MovieForm)
